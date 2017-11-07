@@ -1,10 +1,11 @@
 object Form1: TForm1
   Left = 0
   Top = 0
+  ActiveControl = spRed
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Convert Hex em TColor'
-  ClientHeight = 168
+  ClientHeight = 165
   ClientWidth = 300
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,9 +15,35 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object Image1: TImage
+    Left = 178
+    Top = 9
+    Width = 114
+    Height = 114
+  end
+  object Label1: TLabel
+    Left = 8
+    Top = 89
+    Width = 19
+    Height = 13
+    Caption = 'Red'
+  end
+  object Green: TLabel
+    Left = 65
+    Top = 89
+    Width = 29
+    Height = 13
+    Caption = 'Green'
+  end
+  object Label2: TLabel
+    Left = 123
+    Top = 89
+    Width = 20
+    Height = 13
+    Caption = 'Blue'
+  end
   object edtHex: TLabeledEdit
     Left = 8
     Top = 22
@@ -37,7 +64,7 @@ object Form1: TForm1
     EditLabel.Height = 13
     EditLabel.Caption = 'Cor TColor'
     TabOrder = 1
-    OnChange = edtColorChange
+    OnKeyPress = edtHexKeyPress
   end
   object Button1: TButton
     Left = 8
@@ -46,93 +73,48 @@ object Form1: TForm1
     Height = 25
     Caption = 'Converter'
     TabOrder = 2
-    OnClick = Button1Click
   end
-  object Panel1: TPanel
-    Left = 180
-    Top = 8
-    Width = 110
-    Height = 110
-    TabOrder = 3
-    object Image1: TImage
-      Left = 1
-      Top = 1
-      Width = 108
-      Height = 108
-      Margins.Left = 0
-      Margins.Top = 0
-      Margins.Right = 0
-      Margins.Bottom = 0
-      Align = alClient
-      Stretch = True
-      ExplicitLeft = -5
-      ExplicitTop = -5
-      ExplicitWidth = 120
-      ExplicitHeight = 120
-    end
-  end
-  object edtRed: TLabeledEdit
-    Left = 8
-    Top = 102
-    Width = 50
-    Height = 21
-    EditLabel.Width = 19
-    EditLabel.Height = 13
-    EditLabel.Caption = 'Red'
-    EditLabel.Font.Charset = DEFAULT_CHARSET
-    EditLabel.Font.Color = clWindowText
-    EditLabel.Font.Height = -11
-    EditLabel.Font.Name = 'Tahoma'
-    EditLabel.Font.Style = []
-    EditLabel.ParentFont = False
-    NumbersOnly = True
-    TabOrder = 4
-    OnChange = edtRedChange
-  end
-  object edtGreen: TLabeledEdit
-    Left = 66
-    Top = 102
-    Width = 50
-    Height = 21
-    EditLabel.Width = 29
-    EditLabel.Height = 13
-    EditLabel.Caption = 'Green'
-    EditLabel.Font.Charset = DEFAULT_CHARSET
-    EditLabel.Font.Color = clWindowText
-    EditLabel.Font.Height = -11
-    EditLabel.Font.Name = 'Tahoma'
-    EditLabel.Font.Style = []
-    EditLabel.ParentFont = False
-    NumbersOnly = True
-    TabOrder = 5
-    OnChange = edtRedChange
-  end
-  object edtBlue: TLabeledEdit
-    Left = 122
-    Top = 102
-    Width = 50
-    Height = 21
-    EditLabel.Width = 20
-    EditLabel.Height = 13
-    EditLabel.Caption = 'Blue'
-    EditLabel.Font.Charset = DEFAULT_CHARSET
-    EditLabel.Font.Color = clWindowText
-    EditLabel.Font.Height = -11
-    EditLabel.Font.Name = 'Tahoma'
-    EditLabel.Font.Style = []
-    EditLabel.ParentFont = False
-    NumbersOnly = True
-    TabOrder = 6
-    OnChange = edtRedChange
-  end
-  object BitBtn1: TBitBtn
-    Left = 254
+  object Button2: TButton
+    Left = 255
     Top = 132
-    Width = 36
+    Width = 32
     Height = 25
     Caption = 'P'
-    TabOrder = 7
-    OnClick = BitBtn1Click
+    TabOrder = 3
+    OnClick = Button2Click
+  end
+  object spRed: TSpinEdit
+    Left = 8
+    Top = 104
+    Width = 49
+    Height = 22
+    MaxValue = 255
+    MinValue = 0
+    TabOrder = 4
+    Value = 0
+    OnChange = spRedChange
+  end
+  object spGreen: TSpinEdit
+    Left = 65
+    Top = 104
+    Width = 49
+    Height = 22
+    MaxValue = 255
+    MinValue = 0
+    TabOrder = 5
+    Value = 0
+    OnChange = spRedChange
+  end
+  object spBlue: TSpinEdit
+    Left = 123
+    Top = 104
+    Width = 49
+    Height = 22
+    MaxValue = 255
+    MinValue = 0
+    TabOrder = 6
+    Value = 0
+    OnChange = spRedChange
   end
   object ColorDialog1: TColorDialog
     Left = 192
