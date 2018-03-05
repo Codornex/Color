@@ -17,13 +17,13 @@ type
   end;
 
 type
-  TForm1 = class(TForm)
+  TfrmColor = class(TForm)
     edtHex: TLabeledEdit;
     edtColor: TLabeledEdit;
-    Button1: TButton;
-    ColorDialog1: TColorDialog;
+    btnConvert: TButton;
+    ColorPick: TColorDialog;
     Image1: TImage;
-    Button2: TButton;
+    btnPick: TButton;
     spRed: TSpinEdit;
     spGreen: TSpinEdit;
     spBlue: TSpinEdit;
@@ -31,7 +31,6 @@ type
     Green: TLabel;
     Label2: TLabel;
     procedure edtHexKeyPress(Sender: TObject; var Key: Char);
-    procedure Button2Click(Sender: TObject);
     procedure spRedChange(Sender: TObject);
   private
     { Private declarations }
@@ -43,67 +42,66 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmColor: TfrmColor;
   Cor: TCor;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.Button2Click(Sender: TObject);
+procedure TfrmColor.DoColor(Sender: TObject);
 begin
-  ColorDialog1.Execute();
-  edtColor.Text := ColorToString(ColorDialog1.Color);
-  DoColor(edtColor);
-end;
-
-procedure TForm1.DoColor(Sender: TObject);
-begin
-  try
-    if TEdit(Sender).Name = 'edtHex' then
-    begin
-      Cor.Hexa := TEdit(Sender).Text;
-      Cor.Color := HexToTColor(TEdit(Sender).Text);
-      Cor.Red := GetRValue(Cor.Color);
-      Cor.Green := GetGValue(Cor.Color);
-      Cor.Blue := GetBValue(Cor.Color);
-    end
-    else if TEdit(Sender).Name = 'edtColor' then
-    begin
-      Cor.Hexa := TColorToHex(StringToColor(TEdit(Sender).Text));
-      Cor.Color := StringToColor(TEdit(Sender).Text);
-      Cor.Red := GetRValue(Cor.Color);
-      Cor.Green := GetGValue(Cor.Color);
-      Cor.Blue := GetBValue(Cor.Color);
-    end
-    else if (TSpinEdit(Sender).Name = 'spRed') or (TSpinEdit(Sender).Name = 'spGreen') or (TSpinEdit(Sender).Name = 'spBlue') then
-    begin
-      Cor.Color := RGB(spRed.Value, spGreen.Value, spBlue.Value);
-      Cor.Hexa := TColorToHex(Cor.Color);
-      Cor.Red := GetRValue(Cor.Color);
-      Cor.Green := GetGValue(Cor.Color);
-      Cor.Blue := GetBValue(Cor.Color);
-    end;
-    edtHex.Text := Cor.Hexa;
-    edtColor.Text := ColorToString(Cor.Color);
-    spRed.Value := Cor.Red;
-    spGreen.Value := Cor.Green;
-    spBlue.Value := Cor.Blue;
-    Image1.Canvas.Brush.Color := Cor.Color;
-    Image1.Canvas.Pen.Color := Cor.Color;
-    Image1.Canvas.Rectangle(-1, -1, Image1.Width, Image1.Height);
-    //Canvas.Ellipse(100,100,100,100);
-  except
+  if TComponent(Sender).Name = 'edtHex' then
+  begin
+    Cor.Hexa := TEdit(Sender).Text;
+    Cor.Color := HexToTColor(TEdit(Sender).Text);
+    Cor.Red := GetRValue(Cor.Color);
+    Cor.Green := GetGValue(Cor.Color);
+    Cor.Blue := GetBValue(Cor.Color);
+  end
+  else if TComponent(Sender).Name = 'edtColor' then
+  begin
+    Cor.Hexa := TColorToHex(StringToColor(TEdit(Sender).Text));
+    Cor.Color := StringToColor(TEdit(Sender).Text);
+    Cor.Red := GetRValue(Cor.Color);
+    Cor.Green := GetGValue(Cor.Color);
+    Cor.Blue := GetBValue(Cor.Color);
+  end
+  else if ((TComponent(Sender).Name = 'spRed') or (TComponent(Sender).Name = 'spGreen') or (TComponent(Sender).Name = 'spBlue'))
+      and ((Screen.ActiveControl.Name = 'spRed') or (Screen.ActiveControl.Name = 'spGreen') or (Screen.ActiveControl.Name = 'spBlue')) then
+  begin
+    Cor.Color := RGB(spRed.Value, spGreen.Value, spBlue.Value);
+    Cor.Hexa := TColorToHex(Cor.Color);
+    Cor.Red := GetRValue(Cor.Color);
+    Cor.Green := GetGValue(Cor.Color);
+    Cor.Blue := GetBValue(Cor.Color);
+  end
+  else if TComponent(Sender).Name = 'btnPick' then
+  begin
+    ColorPick.Execute();
+    Cor.Hexa := TColorToHex(ColorPick.Color);
+    Cor.Color := ColorPick.Color;
+    Cor.Red := GetRValue(Cor.Color);
+    Cor.Green := GetGValue(Cor.Color);
+    Cor.Blue := GetBValue(Cor.Color);
   end;
+  edtHex.Text := Cor.Hexa;
+  edtColor.Text := ColorToString(Cor.Color);
+  spRed.Value := Cor.Red;
+  spGreen.Value := Cor.Green;
+  spBlue.Value := Cor.Blue;
+  Image1.Canvas.Brush.Color := Cor.Color;
+  Image1.Canvas.Pen.Color := Cor.Color;
+  Image1.Canvas.Rectangle(-1, -1, Image1.Width, Image1.Height);
 end;
 
-procedure TForm1.edtHexKeyPress(Sender: TObject; var Key: Char);
+procedure TfrmColor.edtHexKeyPress(Sender: TObject; var Key: Char);
 begin
   if key = #13 then
     DoColor(Sender);
 end;
 
-function TForm1.HexToTColor(Hex: String): TColor;
+function TfrmColor.HexToTColor(Hex: String): TColor;
 var
   Hexa: string;
 begin
@@ -111,19 +109,19 @@ begin
   Result := RGB(StrToInt('$' + Copy(Hexa, 1, 2)), StrToInt('$' + Copy(Hexa, 3, 2)), StrToInt('$' + Copy(Hexa, 5, 2)));
 end;
 
-procedure TForm1.spRedChange(Sender: TObject);
+procedure TfrmColor.spRedChange(Sender: TObject);
 begin
   DoColor(Sender);
 end;
 
-function TForm1.TColorToHex(Color: TColor): string;
+function TfrmColor.TColorToHex(Color: TColor): string;
 begin
   Result :=
-    { red value }
+    { Vermelho }
     IntToHex( GetRValue( Color ), 2 ) +
-    { green value }
+    { Verde }
     IntToHex( GetGValue( Color ), 2 ) +
-    { blue value }
+    { Azul }
     IntToHex( GetBValue( Color ), 2 );
     Result := '#'+Result;
 end;

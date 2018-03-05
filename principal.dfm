@@ -1,10 +1,10 @@
-object Form1: TForm1
+object frmColor: TfrmColor
   Left = 0
   Top = 0
   ActiveControl = spRed
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Convert Hex em TColor'
+  Caption = 'Pick Colors'
   ClientHeight = 165
   ClientWidth = 300
   Color = clBtnFace
@@ -21,28 +21,46 @@ object Form1: TForm1
     Left = 178
     Top = 9
     Width = 114
-    Height = 114
+    Height = 117
   end
   object Label1: TLabel
     Left = 8
     Top = 89
-    Width = 19
+    Width = 20
     Height = 13
     Caption = 'Red'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
   end
   object Green: TLabel
     Left = 65
     Top = 89
-    Width = 29
+    Width = 31
     Height = 13
     Caption = 'Green'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
   end
   object Label2: TLabel
     Left = 123
     Top = 89
-    Width = 20
+    Width = 23
     Height = 13
     Caption = 'Blue'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
   end
   object edtHex: TLabeledEdit
     Left = 8
@@ -52,6 +70,12 @@ object Form1: TForm1
     EditLabel.Width = 45
     EditLabel.Height = 13
     EditLabel.Caption = 'Cor Hexa'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 0
     OnKeyPress = edtHexKeyPress
   end
@@ -63,60 +87,100 @@ object Form1: TForm1
     EditLabel.Width = 51
     EditLabel.Height = 13
     EditLabel.Caption = 'Cor TColor'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 1
     OnKeyPress = edtHexKeyPress
   end
-  object Button1: TButton
+  object btnConvert: TButton
     Left = 8
     Top = 132
     Width = 241
     Height = 25
     Caption = 'Converter'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
   end
-  object Button2: TButton
+  object btnPick: TButton
     Left = 255
     Top = 132
-    Width = 32
+    Width = 37
     Height = 25
     Caption = 'P'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 3
-    OnClick = Button2Click
+    OnClick = spRedChange
   end
   object spRed: TSpinEdit
     Left = 8
     Top = 104
     Width = 49
     Height = 22
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
     MaxValue = 255
     MinValue = 0
+    ParentFont = False
     TabOrder = 4
     Value = 0
     OnChange = spRedChange
+    OnExit = spRedChange
   end
   object spGreen: TSpinEdit
     Left = 65
     Top = 104
     Width = 49
     Height = 22
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
     MaxValue = 255
     MinValue = 0
+    ParentFont = False
     TabOrder = 5
     Value = 0
     OnChange = spRedChange
+    OnExit = spRedChange
   end
   object spBlue: TSpinEdit
     Left = 123
     Top = 104
     Width = 49
     Height = 22
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Segoe UI'
+    Font.Style = []
     MaxValue = 255
     MinValue = 0
+    ParentFont = False
     TabOrder = 6
     Value = 0
     OnChange = spRedChange
+    OnExit = spRedChange
   end
-  object ColorDialog1: TColorDialog
+  object ColorPick: TColorDialog
+    Options = [cdFullOpen, cdPreventFullOpen, cdShowHelp, cdAnyColor]
     Left = 192
     Top = 64
   end
