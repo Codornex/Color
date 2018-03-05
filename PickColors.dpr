@@ -1,8 +1,8 @@
-program Project1;
+program PickColors;
 
 uses
   Vcl.Forms,
-  principal in 'principal.pas' {Form1},
+  principal in 'principal.pas' {frmColor},
   Vcl.Themes,
   Vcl.Styles;
 
@@ -11,7 +11,8 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.Title := 'Pick Colors';
   TStyleManager.TrySetStyle('Windows10');
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfrmColor, frmColor);
   Application.Run;
 end.
